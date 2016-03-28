@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="./slider_style.css">
+
+	<!-- include jQuery library -->
+	<script scr="https://code.jquery.com/jquery-1.11.3.js"></script>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="author" content="Miguel">
+	<title>Image Slider</title>
+
+<script type="text/javascript">
+	window.onload = function(){						//Run HTML, CSS code first then JS
+
+	//Set variables
+	var slider = document.getElementsByClassName('slider')[0];   //getting all elements that have a class of slider with the first element, [0], of img
+	var images = slider.getElementsByTagName('img');  //now [0] will have the first image, [1] will have the second, etc
+	var counter = 0;
+	var nextBtn = slider.getElementsByClassName('next')[0];
+	var prevBtn = slider.getElementsByClassName('prev')[0];
+
+
+  	function showImage (counter){
+    	for (var i = 0; i < images.length; i += 1) {    //images.length the # of pics we have
+      		images[i].className = 'hideImage';   //  the first, second, third, etc image will be hidden
+    	}
+
+    	images[counter].className = 'showImage';  //image[0] which is the first image will have the css showImage
+  	}
+
+
+
+  	//When the next button is press run this code.
+  	//check counter variable is not bigger that the amount of images we have, we check when we reach the last image 
+ 	function nextImg () {
+    	// counter variable gets the current img selected
+    	// if we have the last img, we switch back to the first one again
+    
+    	if (counter < images.length -1) {
+      		counter += 1;
+    	} else {
+      		counter = 0;
+    	}
+ 
+    	showImage(counter); //will run the next image
+  	}
+
+	function prevImg () {
+  		// counter variable gets the current img selected
+  		// if we have the first img, we switch back to the last one again
+    
+  		if (counter > 0) {
+    		counter -= 1;
+  		} else {
+    		counter = images.length - 1; //number of images starting from array [0],[1],[2],etc.
+  		}
+ 
+  		showImage(counter); //will run the previous image
+	}
+
+
+	//  If you want to have an auto-slider, uncomment this: 
+	//  window.setInterval(prevImg, 2000);   according to research don't use auto-sliders
+  
+  	// give the buttons an onclick event
+  	nextBtn.onclick = nextImg;
+  	prevBtn.onclick = prevImg;
+
+  	showImage(counter); //will automattically show the first image of the sequence
+
+
+
+};
+
+
+</script>
+
+
+
+</head>
+<body>
+
+	<div class="wrapper">
+		Image slider <br> 
+
+
+		<div class = "slider">
+			<!-- include images that will be used -->
+			<img src="./pics/image1.jpg" >
+			<img src="./pics/image2.jpg" >
+			<img src="./pics/image3.jpg" >
+
+			
+			<!-- Symbols -->
+			<button class="prev">&#60;</button> 
+    		<button class="next">&#62;</button>
+
+		</div> <!-- end picture -->
+
+
+	</div> <!-- end wrapper -->
+
+
+
+</body>
+</html>
